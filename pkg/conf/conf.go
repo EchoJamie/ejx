@@ -43,7 +43,7 @@ func InitConfig(confName string, confPaths ...string) {
 			}
 		}
 		// 文件是否存在
-		confFile := confPath + confName
+		confFile := confPath + "/" + confName
 		if !filepath.Exist(confFile) {
 			// 初始化配置
 			viper.SetConfigType("yaml")
@@ -72,7 +72,7 @@ func InitConfig(confName string, confPaths ...string) {
 // @return	[]byte		配置模板
 func gainConfigTemplate(configName string) []byte {
 	// 替换为 默认配置文件名
-	replaceName := strings.Replace(configName, ".", "default.", -1)
+	replaceName := strings.Replace(configName, ".", ".default.", -1)
 	return requestConfigTemplate(replaceName)
 }
 
