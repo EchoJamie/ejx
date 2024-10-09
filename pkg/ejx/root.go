@@ -36,9 +36,9 @@ var ejxCmd = &cobra.Command{
 			delegateCmd.AddCommand(modeCmd)
 			delegateCmd.SetArgs(args)
 			delegateCmd.Flags().AddFlagSet(cmd.Flags())
-			delegateCmd.Execute()
+			_ = delegateCmd.Execute()
 		default:
-			cmd.Help()
+			_ = cmd.Help()
 		}
 
 	},

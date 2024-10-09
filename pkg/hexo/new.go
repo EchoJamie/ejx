@@ -43,6 +43,6 @@ func newCmdMain(args []string) {
 		os.Exit(1)
 	} else {
 		fmt.Println("「" + title + "」 创建成功！🎉🎉🎉")
-		open()
+		_ = open()
 	}
 }

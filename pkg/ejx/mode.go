@@ -76,7 +76,7 @@ var modeCmd = &cobra.Command{
 			fmt.Println("当前模式:", mode)
 		}
 		if !showFlag && !setFlag {
-			cmd.Help()
+			_ = cmd.Help()
 		}
 	},
 }

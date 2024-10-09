@@ -81,7 +81,7 @@ func gainConfigTemplate(configName string) []byte {
 // @return	[]byte		配置模板
 func requestConfigTemplate(filename string) []byte {
 
-	resp := request.Get("https://raw.githubusercontent.com/EchoJamie/ejx/main/configs/"+filename, nil, request.JsonHeader())
+	resp := request.Get("https://raw.githubusercontent.com/EchoJamie/ejx/main/configs/"+filename, request.JsonHeader())
 	defer request.CloseRespBody(resp.Body)
 
 	if resp.StatusCode == 200 {

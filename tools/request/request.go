@@ -10,7 +10,7 @@ import (
 	"os"
 )
 
-func Get(url string, reqBody io.Reader, header http.Header) *http.Response {
+func Get(url string, header http.Header) *http.Response {
 	return request(url, "GET", nil, header)
 }
 
