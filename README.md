@@ -39,3 +39,25 @@ $ ejx run
 # 发布文章: 交互式操作, 输入数字选择文章
 $ ejx publish
 ```
+
+##### 本地编译
+
+跨平台参数, 需要添加环境变量, 可参考如下
+
+* 操作系统: GOOS=windows,linux,darwin
+    1. Windows: windows
+    2. Linux: linux
+    3. Mac: darwin
+* 架构: GOARCH=amd64,arm64
+  * Intel: amd64
+  * M1: arm64
+
+编译命令示例
+
+```shell
+# Mac M1 编译 
+$ CGO_ENABLED=0 
+$ GOOS=darwin 
+$ GOARCH=arm64 
+$ go build -o build/ejx cmd/ejx/ejx.go
+```
