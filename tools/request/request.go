@@ -1,5 +1,5 @@
 /*
-Copyright © 2024 jamie HERE <EMAIL ADDRESS>
+Copyright © 2024 EchoJamie HERE <EMAIL ADDRESS>
 */
 package request
 
