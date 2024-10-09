@@ -26,7 +26,7 @@ func SecondCheckWithYesAndNo(checkText, yes, no string) {
 	var yn string
 	fmt.Printf("%s %s: ", checkText, text.WhiteText("(Y/N)"))
 	defer inputErr()
-	fmt.Scanln(&yn)
+	_, _ = fmt.Scanln(&yn)
 	yn = strings.ToUpper(yn)
 	if yn == "N" {
 		fmt.Print(no)

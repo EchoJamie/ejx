@@ -28,7 +28,7 @@ var hexoCmd = &cobra.Command{
 		cmd.CompletionOptions.DisableDefaultCmd = true
 	},
 	Run: func(cmd *cobra.Command, args []string) {
-		cmd.Help()
+		_ = cmd.Help()
 	},
 }
 

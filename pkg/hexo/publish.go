@@ -41,7 +41,7 @@ func publishCmdMain(args []string) {
 		}
 		fmt.Print("请选择要发布的草稿文件序号: ")
 		var index int
-		fmt.Scanln(&index)
+		_, _ = fmt.Scanln(&index)
 		if index < 1 || index > len(dir) {
 			fmt.Println("输入有误")
 			os.Exit(1)
