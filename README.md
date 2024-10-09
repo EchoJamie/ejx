@@ -44,9 +44,9 @@ $ ejx publish
 跨平台参数, 需要添加环境变量, 可参考如下
 
 * 操作系统: GOOS=windows,linux,darwin
-    1. Windows: windows
-    2. Linux: linux
-    3. Mac: darwin
+  * Windows: windows 
+  * Linux: linux
+  * Mac: darwin
 * 架构: GOARCH=amd64,arm64
   * Intel: amd64
   * M1: arm64
