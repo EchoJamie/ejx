@@ -85,8 +85,8 @@ func requestConfigTemplate(filename string) []byte {
 	defer request.CloseRespBody(resp.Body)
 
 	if resp.StatusCode == 200 {
-		bytes, _ := io.ReadAll(resp.Body)
-		return bytes
+		byteArray, _ := io.ReadAll(resp.Body)
+		return byteArray
 	}
 
 	fmt.Println("请重试: ", resp.StatusCode)
