@@ -1,5 +1,5 @@
 /*
-Copyright © 2024 jamie HERE <EMAIL ADDRESS>
+Copyright © 2024 EchoJamie HERE <EMAIL ADDRESS>
 */
 package filepath
 
@@ -17,7 +17,7 @@ func Exist(path string) bool {
 	// 处理 ～ 代表的 home 目录
 	path = Expend(path)
 	_, err := os.Stat(path)
-	return os.IsExist(err)
+	return err == nil
 }
 
 func Expend(path string) string {

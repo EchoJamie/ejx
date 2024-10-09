@@ -1,5 +1,5 @@
 /*
-Copyright © 2024 jamie HERE <EMAIL ADDRESS>
+Copyright © 2024 EchoJamie HERE <EMAIL ADDRESS>
 */
 package conf
 
@@ -11,7 +11,6 @@ import (
 	"github.com/spf13/viper"
 	"io"
 	"os"
-	"strings"
 )
 
 // InitConfig
@@ -26,7 +25,7 @@ import (
 // @param 	confPaths 配置文件遍历路径
 func InitConfig(confName string, confPaths ...string) {
 	// 配置文件名
-	viper.SetConfigFile(confName)
+	viper.SetConfigName(confName)
 	// 配置文件遍历路径
 	for _, confPath := range confPaths {
 		viper.AddConfigPath(confPath)
@@ -43,7 +42,7 @@ func InitConfig(confName string, confPaths ...string) {
 			}
 		}
 		// 文件是否存在
-		confFile := confPath + "/" + confName
+		confFile := confPath + "/" + confName + ".yaml"
 		if !filepath.Exist(confFile) {
 			// 初始化配置
 			viper.SetConfigType("yaml")
@@ -72,7 +71,7 @@ func InitConfig(confName string, confPaths ...string) {
 // @return	[]byte		配置模板
 func gainConfigTemplate(configName string) []byte {
 	// 替换为 默认配置文件名
-	replaceName := strings.Replace(configName, ".", ".default.", -1)
+	replaceName := configName + ".default." + "yaml"
 	return requestConfigTemplate(replaceName)
 }
 
