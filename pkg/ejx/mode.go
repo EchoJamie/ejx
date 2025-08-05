@@ -5,23 +5,26 @@ package ejx
 
 import (
 	"fmt"
+	"github.com/EchoJamie/ejx/tools/text"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"os"
 )
 
 func init() {
-	modeCmd.PersistentFlags().BoolVar(&setFlag, "set", false, "set mode")
-	modeCmd.PersistentFlags().BoolVarP(&showFlag, "show", "v", false, "show mode")
+	modeCmd.PersistentFlags().BoolVar(&setFlag, "set", false, "set current mode")
+	modeCmd.PersistentFlags().BoolVarP(&listFlag, "list", "l", false, "show the mode list and the current mode")
 }
 
+// InitMode 命令初始化读取配置
 func InitMode() {
 	// 读取Mode配置
 	if mode == "" {
 		mode = viper.GetString(modeStr)
 	}
 	if !viper.InConfig(modeStr) || mode != viper.GetString(modeStr) {
-		if setMode(mode) != nil {
+		print("未找到模式配置, 已自动初始化模式为:", defaultMode)
+		if setMode(defaultMode) != nil {
 			panic("初始化模式失败")
 		}
 	}
@@ -29,6 +32,17 @@ func InitMode() {
 
 func GetModeValue() string {
 	return mode
+}
+
+func listMode() {
+	fmt.Println("模式列表:")
+	for _, v := range modeType {
+		if v == GetModeValue() {
+			fmt.Println("*", text.GreenText(v))
+			continue
+		}
+		fmt.Println("-", v)
+	}
 }
 
 func setMode(modeValue string) error {
@@ -41,9 +55,6 @@ func setMode(modeValue string) error {
 	fmt.Println("已切换至「", modeValue, "」模式")
 	return nil
 }
-
-// 声明一个常量数组
-var modeType = []string{"hexo"}
 
 func containsMode(modeValue string) bool {
 	if modeValue == "" {
@@ -62,8 +73,10 @@ func containsMode(modeValue string) bool {
 }
 
 var modeCmd = &cobra.Command{
-	Use:   "mode",
-	Short: "设置模式",
+	Use:     "mode",
+	Short:   "ejx 模式相关命令",
+	Example: modeExample,
+	GroupID: groupId,
 	Run: func(cmd *cobra.Command, args []string) {
 		if setFlag {
 			err := setMode(args[0])
@@ -72,11 +85,18 @@ var modeCmd = &cobra.Command{
 			}
 			return
 		}
-		if showFlag {
-			fmt.Println("当前模式:", mode)
+		if listFlag {
+			listMode()
+			return
 		}
-		if !showFlag && !setFlag {
-			_ = cmd.Help()
-		}
+		_ = cmd.Help()
 	},
+}
+
+func CheckCurrentMode(currentMode string) {
+	if mode == currentMode {
+		return
+	}
+	fmt.Println("请切换至" + text.RedText(currentMode) + "模式, 再重新执行.")
+	os.Exit(1)
 }

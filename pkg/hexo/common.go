@@ -10,8 +10,8 @@ import (
 	"os/exec"
 )
 
-const GroupId = "hexo"
-const GroupTitle = GroupId + " Mode"
+const groupId = "hexo"
+const groupTitle = groupId + " Mode"
 
 func hexoClean() error {
 	cleanCmd := exec.Command("hexo", "clean")

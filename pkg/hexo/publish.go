@@ -5,6 +5,7 @@ package hexo
 
 import (
 	"fmt"
+	"github.com/EchoJamie/ejx/pkg/ejx"
 	"github.com/EchoJamie/ejx/tools/filepath"
 	"github.com/EchoJamie/ejx/tools/interaction"
 	"github.com/EchoJamie/ejx/tools/text"
@@ -15,16 +16,12 @@ import (
 
 const draftsSubPath = "/source/_drafts"
 
-func init() {
-	hexoCmd.AddCommand(publishCmd)
-}
-
 var publishCmd = &cobra.Command{
 	Use:     "publish",
-	Short:   "ejx publish",
-	Long:    "ejx -m hexo publish",
-	GroupID: GroupId,
+	Short:   "发布草稿",
+	GroupID: groupId,
 	PreRun: func(cmd *cobra.Command, args []string) {
+		ejx.CheckCurrentMode(ejx.ModeHexo)
 		CheckRootPath()
 	},
 	Run: func(cmd *cobra.Command, args []string) {

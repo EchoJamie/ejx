@@ -5,20 +5,17 @@ package hexo
 
 import (
 	"fmt"
+	"github.com/EchoJamie/ejx/pkg/ejx"
 	"github.com/spf13/cobra"
 	"os"
 )
 
-func init() {
-	hexoCmd.AddCommand(runCmd)
-}
-
 var runCmd = &cobra.Command{
 	Use:     "run",
-	Short:   "ejx run",
-	Long:    "ejx -m hexo run",
-	GroupID: GroupId,
+	Short:   "本地运行",
+	GroupID: groupId,
 	PreRun: func(cmd *cobra.Command, args []string) {
+		ejx.CheckCurrentMode(ejx.ModeHexo)
 		CheckRootPath()
 	},
 	Run: func(cmd *cobra.Command, args []string) {
