@@ -1,10 +1,11 @@
 /*
 Copyright © 2024 EchoJamie HERE <EMAIL ADDRESS>
 */
-package ejx
+package mode
 
 import (
 	"fmt"
+	"github.com/EchoJamie/ejx/pkg/common/cmd_group"
 	"github.com/EchoJamie/ejx/tools/text"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -32,6 +33,35 @@ func InitMode() {
 
 func GetModeValue() string {
 	return mode
+}
+
+func CheckCurrentMode(currentMode string) {
+	if mode == currentMode {
+		return
+	}
+	fmt.Println("请切换至" + text.RedText(currentMode) + "模式, 再重新执行.")
+	os.Exit(1)
+}
+
+var modeCmd = &cobra.Command{
+	Use:     "mode",
+	Short:   "ejx 模式相关命令",
+	Example: modeExample,
+	GroupID: cmd_group.CoreGroupId,
+	Run: func(cmd *cobra.Command, args []string) {
+		if setFlag {
+			err := setMode(args[0])
+			if err != nil {
+				fmt.Println("设置模式失败, 请检查参数是否正确")
+			}
+			return
+		}
+		if listFlag {
+			listMode()
+			return
+		}
+		_ = cmd.Help()
+	},
 }
 
 func listMode() {
@@ -72,31 +102,8 @@ func containsMode(modeValue string) bool {
 	return false
 }
 
-var modeCmd = &cobra.Command{
-	Use:     "mode",
-	Short:   "ejx 模式相关命令",
-	Example: modeExample,
-	GroupID: groupId,
-	Run: func(cmd *cobra.Command, args []string) {
-		if setFlag {
-			err := setMode(args[0])
-			if err != nil {
-				fmt.Println("设置模式失败, 请检查参数是否正确")
-			}
-			return
-		}
-		if listFlag {
-			listMode()
-			return
-		}
-		_ = cmd.Help()
-	},
-}
-
-func CheckCurrentMode(currentMode string) {
-	if mode == currentMode {
-		return
+func GetCommands() []*cobra.Command {
+	return []*cobra.Command{
+		modeCmd,
 	}
-	fmt.Println("请切换至" + text.RedText(currentMode) + "模式, 再重新执行.")
-	os.Exit(1)
 }

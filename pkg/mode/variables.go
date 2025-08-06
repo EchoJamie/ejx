@@ -1,7 +1,7 @@
 /*
 Copyright © 2024 EchoJamie HERE <EMAIL ADDRESS>
 */
-package ejx
+package mode
 
 /*
 mode 相关变量
@@ -23,9 +23,6 @@ const (
 
 // 默认模式
 const defaultMode = ModeNone
-
-const groupId = "core"
-const groupTitle = "Core"
 
 var (
 	modeType = []string{ModeHexo, ModeDf, ModeNone}

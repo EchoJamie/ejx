@@ -5,7 +5,7 @@ package hexo
 
 import (
 	"fmt"
-	"github.com/EchoJamie/ejx/pkg/ejx"
+	"github.com/EchoJamie/ejx/pkg/mode"
 	"github.com/EchoJamie/ejx/tools/filepath"
 	"github.com/EchoJamie/ejx/tools/text"
 	"github.com/spf13/cobra"
@@ -17,7 +17,7 @@ var initCmd = &cobra.Command{
 	Short:   "初始化 hexo 模式配置",
 	GroupID: groupId,
 	PreRun: func(cmd *cobra.Command, args []string) {
-		ejx.CheckCurrentMode(ejx.ModeHexo)
+		mode.CheckCurrentMode(mode.ModeHexo)
 	},
 	Run: func(cmd *cobra.Command, args []string) {
 		initCmdMain(args)

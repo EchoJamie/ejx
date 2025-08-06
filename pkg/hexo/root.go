@@ -5,15 +5,10 @@ package hexo
 
 import (
 	"fmt"
-	"github.com/EchoJamie/ejx/pkg/ejx"
-	"github.com/spf13/cobra"
+	"github.com/EchoJamie/ejx/pkg/common/cmd_group"
 	"github.com/spf13/viper"
 	"os"
 )
-
-func init() {
-	ejx.AddCommandGroup(getCommandGroup())
-}
 
 func CheckRootPath() {
 	if !viper.InConfig("hexo.root") {
@@ -22,15 +17,12 @@ func CheckRootPath() {
 	}
 }
 
-func getCommandGroup() ejx.CommandGroup {
-	return ejx.CommandGroup{
-		Id:    groupId,
-		Title: groupTitle,
-		Commands: []*cobra.Command{
-			initCmd,
-			newCmd,
-			runCmd,
-			publishCmd,
-		},
-	}
+func GetCommandGroup() cmd_group.CommandGroup {
+	return cmd_group.CustomCommandGroup(
+		groupId, groupTitle,
+		initCmd,
+		newCmd,
+		runCmd,
+		publishCmd,
+	)
 }

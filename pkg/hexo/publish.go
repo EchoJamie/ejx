@@ -5,7 +5,7 @@ package hexo
 
 import (
 	"fmt"
-	"github.com/EchoJamie/ejx/pkg/ejx"
+	"github.com/EchoJamie/ejx/pkg/mode"
 	"github.com/EchoJamie/ejx/tools/filepath"
 	"github.com/EchoJamie/ejx/tools/interaction"
 	"github.com/EchoJamie/ejx/tools/text"
@@ -21,7 +21,7 @@ var publishCmd = &cobra.Command{
 	Short:   "发布草稿",
 	GroupID: groupId,
 	PreRun: func(cmd *cobra.Command, args []string) {
-		ejx.CheckCurrentMode(ejx.ModeHexo)
+		mode.CheckCurrentMode(mode.ModeHexo)
 		CheckRootPath()
 	},
 	Run: func(cmd *cobra.Command, args []string) {

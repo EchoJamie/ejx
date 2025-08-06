@@ -5,18 +5,18 @@ package ejx
 
 import (
 	"github.com/EchoJamie/ejx/init/global"
+	"github.com/EchoJamie/ejx/pkg/common/cmd_group"
+	"github.com/EchoJamie/ejx/pkg/hexo"
+	"github.com/EchoJamie/ejx/pkg/mode"
 	"github.com/spf13/cobra"
 	"log"
 )
 
 func init() {
-	AddCommandGroup(CommandGroup{
-		Id:    groupId,
-		Title: groupTitle,
-		Commands: []*cobra.Command{
-			modeCmd,
-		},
-	})
+	commands := mode.GetCommands()
+	// commands = append(commands, other_package.GetCommands())
+	addCommandGroup(cmd_group.CoreCommandGroup(commands...))
+	addCommandGroup(hexo.GetCommandGroup())
 }
 
 var ejxCmd = &cobra.Command{
@@ -25,7 +25,7 @@ var ejxCmd = &cobra.Command{
 	Long:             global.Banner,
 	TraverseChildren: true,
 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
-		InitMode()
+		mode.InitMode()
 	},
 	PreRun: func(cmd *cobra.Command, args []string) {
 		cmd.DisableFlagParsing = true
@@ -40,10 +40,10 @@ func Run() {
 	}
 }
 
-func AddCommandGroup(group CommandGroup) {
+func addCommandGroup(group cmd_group.CommandGroup) {
 	ejxCmd.AddGroup(&cobra.Group{
-		ID:    group.Id,
-		Title: group.Title + " Command:",
+		ID:    group.GetId(),
+		Title: group.GetTitle() + " Command:",
 	})
 	for _, command := range group.Commands {
 		ejxCmd.AddCommand(command)
