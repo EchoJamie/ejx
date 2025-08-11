@@ -88,7 +88,7 @@ func setMode(modeValue string) error {
 
 func containsMode(modeValue string) bool {
 	if modeValue == "" {
-		fmt.Println("请指定模式: ejx -m [hexo]")
+		fmt.Println("请指定模式: ejx mode --set none")
 		os.Exit(1)
 	}
 
@@ -98,7 +98,7 @@ func containsMode(modeValue string) bool {
 			return true
 		}
 	}
-	fmt.Println("未知模式:", modeValue)
+	fmt.Println("目前暂不支持[", text.RedText(modeValue), "]模式")
 	return false
 }
 

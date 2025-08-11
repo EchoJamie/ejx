@@ -4,10 +4,11 @@ Copyright © 2024 EchoJamie HERE <EMAIL ADDRESS>
 package hexo
 
 import (
-	"github.com/spf13/viper"
 	"io"
 	"os"
 	"os/exec"
+
+	"github.com/spf13/viper"
 )
 
 const groupId = "hexo"
@@ -66,11 +67,11 @@ func hexoPublish(name string) error {
 }
 
 func open() error {
-	publishCmd := exec.Command("code", ".")
-	publishCmd.Stdout = io.Discard
-	publishCmd.Stderr = io.Discard
-	publishCmd.Dir = getBlogRootPath()
-	err := publishCmd.Run()
+	openCmd := exec.Command("code", ".")
+	openCmd.Stdout = io.Discard
+	openCmd.Stderr = io.Discard
+	openCmd.Dir = getBlogRootPath()
+	err := openCmd.Run()
 	return err
 }
 

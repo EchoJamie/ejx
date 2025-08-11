@@ -17,7 +17,7 @@ const modeStr = "mode"
 // 模式类型
 const (
 	ModeHexo = "hexo"
-	ModeDf   = "df"
+	ModeGit  = "git"
 	ModeNone = "none"
 )
 
@@ -25,7 +25,7 @@ const (
 const defaultMode = ModeNone
 
 var (
-	modeType = []string{ModeHexo, ModeDf, ModeNone}
+	modeType = []string{ModeHexo, ModeGit, ModeNone}
 )
 
 const modeExample string = "  ejx mode -l\n  ejx mode --set hexo"
